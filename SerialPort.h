@@ -235,6 +235,7 @@ char* SerialPort::readString(int maxBufferSize) {
 
     return buf_;
 }
+
 int SerialPort::writeChar(char c) {
     char cc[1];
     cc[0] = c;
@@ -242,14 +243,15 @@ int SerialPort::writeChar(char c) {
     bytes_written = write(fd_, cc, sizeof(cc));
     return bytes_written;
 }
+
 int SerialPort::writeString(char* str) {
     int bytes_written  = 0;
     bytes_written = write(fd_, str, sizeof(str));
     bytes_written += write(fd_, "\n", sizeof("\n"));
     return bytes_written;
 }
-int SerialPort::writeString(std::string str)
-{
+
+int SerialPort::writeString(std::string str) {
     char *cstr = new char[str.size() + 1];
     strncpy(cstr, str.c_str(), str.size());
     int bytes_written  = 0;
